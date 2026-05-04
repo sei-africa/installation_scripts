@@ -384,7 +384,7 @@ APP_DIR=${ROOT_DIR}/${github_dst}
 if [[ -n "$dst_local_dir" ]]; then
     DST_LOCAL_DIR=${dst_local_dir}
 else
-    DST_LOCAL_DIR=${ROOT_DIR}/${github_dst}_local_data
+    DST_LOCAL_DIR=${ROOT_DIR}/${github_dst}_DATA
 fi
 mkdir -p $DST_LOCAL_DIR
 
@@ -412,7 +412,7 @@ echo "==========================================================================
 echo -e "\nInstalling Python venv and requirements .....................\n"
 
 if [[ -n "$python_venv_dir" ]]; then
-    PYTHON_VENV=${python_venv_dir}/${github_dst}
+    PYTHON_VENV=${python_venv_dir}
 else
     PYTHON_VENV=${ROOT_DIR}
 fi
@@ -421,7 +421,7 @@ mkdir -p $PYTHON_VENV
 cd $PYTHON_VENV
 $PYTHON -m venv venv
 python_cmd=${PYTHON_VENV}/venv/bin/python
-${python_cmd} -m pip install --upgrade pip
+${python_cmd} -m pip install --upgrade pip wheel setuptools
 ${python_cmd} -m pip install cache purge
 cd $APP_DIR
 ${python_cmd} -m pip install -r requirements.txt
