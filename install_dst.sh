@@ -422,6 +422,7 @@ cd $PYTHON_VENV
 $PYTHON -m venv venv
 python_cmd=${PYTHON_VENV}/venv/bin/python
 ${python_cmd} -m pip install --upgrade pip
+${python_cmd} -m pip install cache purge
 cd $APP_DIR
 ${python_cmd} -m pip install -r requirements.txt
 
