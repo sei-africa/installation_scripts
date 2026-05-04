@@ -421,8 +421,8 @@ mkdir -p $PYTHON_VENV
 cd $PYTHON_VENV
 $PYTHON -m venv venv
 python_cmd=${PYTHON_VENV}/venv/bin/python
-${python_cmd} -m pip install --upgrade pip wheel setuptools
 ${python_cmd} -m pip install cache purge
+${python_cmd} -m pip install --upgrade pip wheel setuptools
 cd $APP_DIR
 ${python_cmd} -m pip install -r requirements.txt
 
