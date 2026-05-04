@@ -20,7 +20,7 @@
 #
 # ./install_dst.sh --dst-root-dir=/home/rijaf \
 #                  --dst-local-dir=/home/rijaf/Desktop/emi_dev_data \
-#.                 --python-venv=/Users/rijaf/Desktop/DATA/VirtualEnv \
+#.                 --python-venv-dir=/Users/rijaf/Desktop/DATA/VirtualEnv \
 #                  --python-version=3.14 \
 #                  --port=8383
 #
@@ -84,7 +84,7 @@ for arg in "$@"; do
             dst_local_dir="${arg#*=}"
             shift
             ;;
-        ----python-venv-dir=*)
+        --python-venv-dir=*)
             python_venv_dir="${arg#*=}"
             shift
             ;;
