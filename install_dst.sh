@@ -421,7 +421,7 @@ mkdir -p $PYTHON_VENV
 cd $PYTHON_VENV
 $PYTHON -m venv venv
 python_cmd=${PYTHON_VENV}/venv/bin/python
-${python_cmd} -m pip install cache purge
+${python_cmd} -m pip cache purge
 ${python_cmd} -m pip install --upgrade pip wheel setuptools
 cd $APP_DIR
 ${python_cmd} -m pip install -r requirements.txt
@@ -451,20 +451,32 @@ for f in dev-*; do
     done
 done
 
-cd ${APP_DIR}/app/yaml
-for f in dev-*; do
-    cp $f "${f//dev-/}"
+YAML_DIRS=()
+while IFS= read -r -d '' dir; do
+    YAML_DIRS+=("$dir")
+done < <(find "$APP_DIR/app" -type d -name "yaml" -print0)
+
+for dir in "${YAML_DIRS[@]}"; do
+    cd "$dir"
+    for f in dev-*; do
+        cp $f "${f//dev-/}"
+    done
 done
 
-cd ${APP_DIR}/app/dst_webapi/yaml
-for f in dev-*; do
-    cp $f "${f//dev-/}"
-done
+# cd ${APP_DIR}/app/yaml
+# for f in dev-*; do
+#     cp $f "${f//dev-/}"
+# done
 
-cd ${APP_DIR}/app/auth/yaml
-for f in dev-*; do
-    cp $f "${f//dev-/}"
-done
+# cd ${APP_DIR}/app/dst_webapi/yaml
+# for f in dev-*; do
+#     cp $f "${f//dev-/}"
+# done
+
+# cd ${APP_DIR}/app/auth/yaml
+# for f in dev-*; do
+#     cp $f "${f//dev-/}"
+# done
 
 ini=${APP_DIR}/dst.ini
 if $UWSGI_LOGGER; then
